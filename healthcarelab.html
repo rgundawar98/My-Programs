@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Health Care</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<%
+if(request.getParameter("m1")!=null){%>
+
+<script>alert('Booked Sucess!')</script>
+
+<%}
+if(request.getParameter("m2")!=null){%>
+
+<script>alert('Item Failed..!')</script>
+<%
+}
+%>
+<body>
+<!-- Main Header -->
+<header class="main-header">
+<imgsrc="Images/healthcare2.png" alt="health">
+<h1>Health Care Lab</h1>
+</header>
+<!-- Dropdown Navbar -->
+<nav>
+<ul>
+<li>
+<a href="technicianhome.jsp">Home</a>
+</li>
+
+<li>
+<a href="customerdetails.jsp" class="active">View Customer Details</a>
+</li>
+<li>
+<a href="logout.jsp">Logout</a>
+</li>
+</ul>
+</nav>
+<br>
+<h2  style="color:black">View Customer Details</h2>
+<center>
+<table style="margin-top: 2cm" width="100">
+<tr style="color:black">
+
+<th>Customer Name</th>
+<th>Type of Test</th>
+<th>Location</th>
+<th>Contact</th>
+<th>Date</th>
+<th>Book</th>
+</tr>
+<%@page import="java.sql.*,java.util.*" %>
+
+<%
+
+        String tname = session.getAttribute("username").toString();            
+ Connection connection =DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","oracle");
+
+        String sql="SELECT * FROM bookings where tname = '"+tname+"'";
+        Statement stmt = connection.createStatement();
+ResultSetrs =stmt.executeQuery(sql);
+
+while(rs.next()){
+
+            %>
+
+<tr>
+
+<td><%=rs.getString(1)%></td>
+<td><%=rs.getString(3)%></td>
+<td><%=rs.getString(4)%></td>
+<td><%=rs.getString(5)%></td>
+<td><%=rs.getString(6)%></td>
+<td><a href="adddetails.jsp?cname=<%=rs.getString(1)%>&types=<%=rs.getString(3)%>">Accept</a></td>
+
+</tr>
+<%
+            }
+%>
+</table>
+</center>
+<br><br><br><br><br><br><br><br><br><br>
+<!-- Main Footer -->
+<footer class="main-footer">
+<p>Thank You :)</p>
+</footer>
+</body>
+</html>
+
+
+
+
+Customer Register Code –
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Health Care</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<%
+if(request.getParameter("m1")!=null){%>
+
+<script>alert('Login Sucess!')</script>
+
+<%}
+if(request.getParameter("m2")!=null){%>
+
+<script>alert('Registration Failed..!')</script>
+<%
+}
+%>
+<body>
+<!-- Main Header -->
+<header class="main-header">
+<imgsrc="Images/healthcare2.png" alt="health">
+<h1>Health Care Lab</h1>
+</header>
+<!-- Dropdown Navbar -->
+<nav>
+<ul>
+<li>
+<a href="HomePage.html">Home</a>
+</li>
+<li>
+<a href="managerlogin.jsp">Manager</a>
+</li>
+<li>
+<a href="technicianlogin.jsp">Technician</a>
+</li>
+<li>
+<a href="customerlogin.jsp" class="active">Customer</a>
+</li>
+</ul>
+</nav>
+<div class="form-divreg">
+<imgsrc="Images/user.png">
+<h2>Register Here</h2>
+<form action="customerregisteraction.jsp" method="post">
+<input type="text" placeholder="Name" name="username" required="" autocomplete="off">
+<br>
+<input type="password" placeholder="Password"  name="password" required="" autocomplete="off">
+<br>
+<input type="email" placeholder="E-mail Id" name="email" required="" autocomplete="off">
+<br>
+<input type="text" placeholder="Location" name="address" required="" autocomplete="off">
+<br>
+<input type="text" placeholder="Contact No" name="cnumber"   autocomplete="off">
+<br>
+<br>
+<input type="submit" value="Register">
+<br>
+<br>
+</form>
+</div>
+<!-- Main Footer -->
+<footer class="main-footer">
+<p>Thank You :)</p>
+</footer>
+</body>
+</html>
+
+
+Sample Code of technician –
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Health Care</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<%
+if(request.getParameter("m1")!=null){%>
+
+<script>alert('Registration Sucess!')</script>
+
+<%}
+if(request.getParameter("m2")!=null){%>
+
+<script>alert('Login Failed..!')</script>
+<%
+}
+%>
+<body>
+<!-- Main Header -->
+<header class="main-header">
+<imgsrc="Images/healthcare2.png" alt="health">
+<h1>Health Care Lab</h1>
+</header>
+<!-- Dropdown Navbar -->
+<nav>
+<ul>
+<li>
+<a href="HomePage.html" >Home</a>
+</li>
+
+<li>
+<a href="managerlogin.jsp" >Manager</a>
+</li>
+<li>
+<a href="technicianlogin.jsp" class="active">Technician</a>
+</li>
+<li>
+<a href="customerlogin.jsp">Customer</a>
+</li>
+</ul>
+</nav>
+<!-- Login Form -->
+<div class="form-div">
+<imgsrc="Images/user.png">
+<h2>Technician Login</h2>
+<form action="technicianaction.jsp" method="post">
+<input type="text" placeholder="Username" name="username" required="" autocomplete="off">
+<br>
+<input type="password" placeholder="Password" name="password" required="">
+<br>
+<br>
+<input type="submit" value="Login">
+<p><a href="technicianregister.jsp" class="reg">New User Register Here...</a></p>
+<br>
+</form>
+</div>
+<br><br>
+
+
+<!-- Main Footer -->
+<footer class="main-footer">
+<p>Thank You :)</p>
+</footer>
+</body>
+</html>
+
